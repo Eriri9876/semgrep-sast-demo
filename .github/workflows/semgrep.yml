@@ -1,0 +1,33 @@
+name: Semgrep SAST Scan
+
+# 触发时机：往 main 推代码、或者给 main 提 PR 时自动跑
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  semgrep:
+    name: Semgrep Scan          # 这个名字后面配分支保护会用到
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write    # 允许把扫描结果上传到 Security 标签页
+    steps:
+      - name: 拉取代码
+        uses: actions/checkout@v4
+
+      - name: 安装 Semgrep
+        run: pip install semgrep
+
+      - name: 运行扫描
+        # --config 用的是官方现成规则集，等 B 同学的自定义规则写好了，再加一行指过去就行
+        # --error 表示：一旦扫到漏洞就让这一步失败（这就是"拦截"的关键）
+        run: semgrep scan --config p/security-audit --config p/owasp-top-ten --sarif -o semgrep.sarif --error
+
+      - name: 上传扫描报告
+        if: always()            # 哪怕上一步失败了也要上传，这样才能在 Security 里看到扫出了啥
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: semgrep.sarif
