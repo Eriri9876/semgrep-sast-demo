@@ -1,19 +1,21 @@
-# demo_vuln.py —— 故意写的漏洞样例，专门用来测流水线
-# 正式项目里这里会换成 E 同学靶场组造的漏洞代码
-import os
-import sqlite3
+# demo_vuln.py —— 故意写的漏洞样例，用来测试流水线会不会拦截
+# 这几个都是 Semgrep 标准规则集能稳定识别的危险写法
+import subprocess
+import yaml
+import hashlib
 
-def get_user(user_id):
-    conn = sqlite3.connect("app.db")
-    cursor = conn.cursor()
-    # 漏洞1：SQL 注入 —— 把用户输入直接拼进 SQL 语句
-    query = "SELECT * FROM users WHERE id = '" + user_id + "'"
-    cursor.execute(query)
-    return cursor.fetchall()
-
+# 漏洞1：命令注入 —— shell=True 且拼接外部输入
 def run_command(filename):
-    # 漏洞2：命令注入 —— 用户输入直接塞进系统命令
-    os.system("cat " + filename)
+    subprocess.Popen("cat " + filename, shell=True)
 
-# 漏洞3：硬编码密钥
-API_KEY = "sk-1234567890abcdef_hardcoded_secret"
+# 漏洞2：不安全反序列化 —— yaml.load 不指定 SafeLoader
+def load_config(raw):
+    return yaml.load(raw)
+
+# 漏洞3：危险的 eval —— 直接执行字符串
+def calculate(expr):
+    return eval(expr)
+
+# 漏洞4：弱哈希算法 —— 用 MD5 处理密码
+def hash_password(password):
+    return hashlib.md5(password.encode()).hexdigest()
