@@ -1,0 +1,11 @@
+rules:
+  - id: injection-path-traversal
+    patterns:
+      - pattern: |
+          open(BASE_PATH + $USER_FILE)
+    languages: [python]
+    message: ""
+    severity: ERROR
+    metadata:
+      cwe: "CWE-22"
+      owasp: "A01:2021"

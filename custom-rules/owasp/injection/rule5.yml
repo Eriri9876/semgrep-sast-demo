@@ -1,0 +1,11 @@
+rules:
+  - id: injection-ldap-concat
+    patterns:
+      - pattern: |
+          ldap.search("cn=" + $INPUT)
+    languages: [python]
+    message: "LDAP"
+    severity: WARNING
+    metadata:
+      cwe: "CWE-90"
+      owasp: "A03:2021"

@@ -1,0 +1,13 @@
+rules:
+  - id: general-unused-variable
+    patterns:
+      - pattern: |
+          $VAR = $VALUE
+          ...
+          $FUNC(...)
+    languages: [python]
+    message: ""
+    severity: INFO
+    metadata:
+      cwe: "CWE-563"
+      owasp: "A06:2021"

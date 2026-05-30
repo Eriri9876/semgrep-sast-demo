@@ -1,0 +1,11 @@
+rules:
+  - id: config-insecure-deserialize
+    patterns:
+      - pattern: |
+          pickle.loads($DATA)
+    languages: [python]
+    message: "(pickle)"
+    severity: ERROR
+    metadata:
+      cwe: "CWE-502"
+      owasp: "A08:2021"

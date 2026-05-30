@@ -1,0 +1,11 @@
+rules:
+  - id: auth-weak-hash-md5
+    patterns:
+      - pattern: |
+          hashlib.md5($DATA)
+    languages: [python]
+    message: "MD5"
+    severity: WARNING
+    metadata:
+      cwe: "CWE-327"
+      owasp: "A02:2021"

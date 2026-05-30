@@ -1,0 +1,11 @@
+rules:
+  - id: crypto-insecure-random
+    patterns:
+      - pattern: |
+          random.random()
+    languages: [python]
+    message: ""
+    severity: WARNING
+    metadata:
+      cwe: "CWE-338"
+      owasp: "A02:2021"

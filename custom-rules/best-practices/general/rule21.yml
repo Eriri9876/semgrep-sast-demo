@@ -1,0 +1,10 @@
+rules:
+  - id: general-security-todo
+    patterns:
+      - pattern-regex: TODO.*security
+    languages: [python]
+    message: "TODO"
+    severity: INFO
+    metadata:
+      cwe: "CWE-546"
+      owasp: "A06:2021"

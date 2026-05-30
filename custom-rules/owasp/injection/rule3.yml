@@ -1,0 +1,11 @@
+rules:
+  - id: injection-command-os-system
+    patterns:
+      - pattern: |
+          os.system("ls " + $INPUT)
+    languages: [python]
+    message: "os.system"
+    severity: ERROR
+    metadata:
+      cwe: "CWE-78"
+      owasp: "A03:2021"

@@ -1,0 +1,11 @@
+rules:
+  - id: general-debug-info-leak
+    patterns:
+      - pattern: |
+          print("DEBUG:", $DATA)
+    languages: [python]
+    message: ""
+    severity: INFO
+    metadata:
+      cwe: "CWE-489"
+      owasp: "A06:2021"

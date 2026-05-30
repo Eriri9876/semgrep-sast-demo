@@ -1,0 +1,11 @@
+rules:
+  - id: auth-hardcoded-password
+    patterns:
+      - pattern: |
+          PASSWORD = "123456"
+    languages: [python]
+    message: ""
+    severity: ERROR
+    metadata:
+      cwe: "CWE-259"
+      owasp: "A07:2021"
