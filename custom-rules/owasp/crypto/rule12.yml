@@ -1,11 +1,11 @@
-rules:
-  - id: crypto-insecure-random
-    patterns:
-      - pattern: |
-          random.random()
-    languages: [python]
-    message: ""
-    severity: WARNING
-    metadata:
-      cwe: "CWE-338"
+rules:
+  - id: crypto-insecure-random
+    patterns:
+      - pattern: |
+          random.random()
+    languages: [python]
+    message: "检测到使用 random.random() 生成随机数，该方法不具备密码学安全性；用于令牌、密钥、口令等场景时应改用 secrets 模块。"
+    severity: WARNING
+    metadata:
+      cwe: "CWE-338"
       owasp: "A02:2021"
