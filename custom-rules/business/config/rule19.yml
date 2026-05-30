@@ -1,0 +1,11 @@
+rules:
+  - id: config-yaml-unsafe-load
+    patterns:
+      - pattern: |
+          yaml.load($DATA)
+    languages: [python]
+    message: "YAML"
+    severity: ERROR
+    metadata:
+      cwe: "CWE-502"
+      owasp: "A08:2021"

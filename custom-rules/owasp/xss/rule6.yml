@@ -1,0 +1,11 @@
+rules:
+  - id: xss-reflected-print
+    patterns:
+      - pattern: |
+          print($USER_INPUT)
+    languages: [python]
+    message: "XSS"
+    severity: WARNING
+    metadata:
+      cwe: "CWE-79"
+      owasp: "A03:2021"

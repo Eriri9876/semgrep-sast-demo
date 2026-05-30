@@ -1,0 +1,11 @@
+rules:
+  - id: injection-path-traversal
+    patterns:
+      - pattern: |
+          open(BASE_PATH + $USER_FILE)
+    languages: [python]
+    message: "检测到将用户输入直接拼接进文件路径后打开，存在路径穿越（Path Traversal）风险，应对路径做规范化与白名单校验。"
+    severity: ERROR
+    metadata:
+      cwe: "CWE-22"
+      owasp: "A01:2021"

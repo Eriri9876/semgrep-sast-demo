@@ -1,0 +1,11 @@
+rules:
+  - id: auth-http-transport
+    patterns:
+      - pattern: |
+          requests.get("http://" + $URL)
+    languages: [python]
+    message: "HTTP"
+    severity: WARNING
+    metadata:
+      cwe: "CWE-319"
+      owasp: "A02:2021"

@@ -1,0 +1,11 @@
+rules:
+  - id: injection-sqli-no-param
+    patterns:
+      - pattern: |
+          $CURSOR.execute("SELECT * FROM table WHERE id = %s" % $INPUT)
+    languages: [python]
+    message: "SQL"
+    severity: ERROR
+    metadata:
+      cwe: "CWE-89"
+      owasp: "A03:2021"

@@ -1,0 +1,11 @@
+rules:
+  - id: xss-dom-location
+    patterns:
+      - pattern: |
+          location.hash
+    languages: [javascript]
+    message: "DOMXSS"
+    severity: WARNING
+    metadata:
+      cwe: "CWE-79"
+      owasp: "A03:2021"

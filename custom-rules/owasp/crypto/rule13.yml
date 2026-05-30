@@ -1,0 +1,11 @@
+rules:
+  - id: crypto-des-encryption
+    patterns:
+      - pattern: |
+          DES.new($KEY)
+    languages: [python]
+    message: "DES"
+    severity: ERROR
+    metadata:
+      cwe: "CWE-326"
+      owasp: "A02:2021"

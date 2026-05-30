@@ -1,0 +1,11 @@
+rules:
+  - id: general-debug-info-leak
+    patterns:
+      - pattern: |
+          print("DEBUG:", $DATA)
+    languages: [python]
+    message: "检测到调试输出语句（print DEBUG），可能在生产环境泄露敏感信息，发布前应移除或改用受控的日志框架。"
+    severity: INFO
+    metadata:
+      cwe: "CWE-489"
+      owasp: "A06:2021"

@@ -1,0 +1,11 @@
+rules:
+  - id: auth-hardcoded-password
+    patterns:
+      - pattern: |
+          PASSWORD = "123456"
+    languages: [python]
+    message: "检测到硬编码密码，凭据不应明文写死在源码中，应通过环境变量或密钥管理服务读取。"
+    severity: ERROR
+    metadata:
+      cwe: "CWE-259"
+      owasp: "A07:2021"
